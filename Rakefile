@@ -4,13 +4,14 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "table-setter-generator"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "thejefflarson@gmail.com"
-    gem.homepage = "http://github.com/thejefflarson/table-setter-generator"
+    gem.name = "table-setter_generator"
+    gem.summary = %Q{A Rails Generator for TableSetter}
+    gem.description = %Q{Generate a hackable version of TableSetter}
+    gem.email = "jeff.larson@propublica.org"
+    gem.homepage = "http://github.com/propublica/table-setter-generator"
     gem.authors = ["Jeff Larson"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_dependency "table_setter", ">= 0.1.2"
+    gem.add_dependency "rails", ">= 2.3.5"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
