@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Larson"]
-  s.date = %q{2010-03-08}
+  s.date = %q{2010-03-09}
   s.description = %q{Generate a hackable version of TableSetter}
   s.email = %q{jeff.larson@propublica.org}
   s.extra_rdoc_files = [
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "USAGE",
      "VERSION",
      "lib/table_setter_generator.rb",
+     "table_setter_generator.gemspec",
      "table_setter_generator.rb",
      "templates/routes.rb",
      "templates/table.rb",
@@ -57,9 +58,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A Rails Generator for TableSetter}
   s.test_files = [
     "test/app/controllers/application_controller.rb",
-     "test/app/controllers/table_controller.rb",
      "test/app/helpers/application_helper.rb",
-     "test/app/models/table.rb",
      "test/config/boot.rb",
      "test/config/environment.rb",
      "test/config/environments/development.rb",

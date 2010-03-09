@@ -34,10 +34,18 @@ class TableSetterGenerator < Rails::Generator::Base
         m.file "ts/public/images/#{image}", "public/images/#{image}"
       end
       
+      # TableSetter Config Files
+      m.directory "config/tables"
+      ["example.yml", "example_facted.yml", "example_formatted.csv", 
+        "example_fomatted.yml", "example_local.csv", "example_local.yml"].each do |table|
+        m.file "ts/tables/#{table}", "config/tables/#{table}"
+      end
+      
       # Local Installs
       m.directory "app/controllers/"
       m.file "table_controller.rb", "app/controllers/table_controller.rb"
       
+      # File changes
       m.route! "map.table \"tables/\", :controller => :table, :action => :show"
       m.route! "map.root   :controller => :table, :action => :index"
       
@@ -54,7 +62,6 @@ EOS
       
       
       # Sinatra to Rails
-      
       m.gsub_file "app/views/layouts/layout.erb", /(javascript_script_tag)/m do |match|
         "javascript_include_tag"
       end
@@ -63,8 +70,15 @@ EOS
         ""
       end
       
-      m.gsub_file "app/views/tables/"
-      
+      m.gsub_file "app/views/table/table.erb", /(#{Regexp.escape '<%= url_for "/#{table.slug}/#{table.prev_page}/" if !table.prev_page.nil? %>'})/m do |match|
+        '<%= url_for(table_path :slug => table.slug, :page => table.prev_page) if !table.prev_page.nil? %>'
+      end
+      m.gsub_file "app/views/table/table.erb", /(#{Regexp.escape '<%= url_for "/#{table.slug}/#{table.next_page}/" if !table.next_page.nil? %>'})/m do |match|
+        '<%= url_for(table_path :slug => table.slug, :page => table.next_page) if !table.next_page.nil? %>'
+      end
+      m.gsub_file "app/views/table/index.erb", /(#{Regexp.escape '<%= url_for "/#{table.slug}/" %>'})/ do |match|
+        '<%= url_for(table_path :slug => table.slug) %>'
+      end
     end
   end
 end
