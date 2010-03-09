@@ -77,7 +77,8 @@ class TableSetterGenerator < Rails::Generator::Base
         '<%= url_for(table_path :slug => table.slug, :page => table.next_page) if !table.next_page.nil? %>'
       end
       
-      m.gsub_file "app/views/table/index.erb", /(#{Regexp.escape '<%= url_for "/#{table.slug}/" %>'})/ do |match|
+      m.gsub_file "app/views/table/index.erb", 
+          /(#{Regexp.escape '<%= url_for "/#{table.slug}/" %>'})/ do |match|
         '<%= url_for(table_path :slug => table.slug) %>'
       end
     end
