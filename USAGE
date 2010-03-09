@@ -1,0 +1,2 @@
+To install the required routes and files for a TableSetter Rails app run:
+script/generate table_setter
