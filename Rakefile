@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "table-setter_generator"
+    gem.name = "table_setter_generator"
     gem.summary = %Q{A Rails Generator for TableSetter}
     gem.description = %Q{Generate a hackable version of TableSetter}
     gem.email = "jeff.larson@propublica.org"

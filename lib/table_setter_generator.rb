@@ -1,3 +1,3 @@
 class TableSetterGenerator
-  # move along nothing to see
+  # move along nothing to see here
 end

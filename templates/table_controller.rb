@@ -1,4 +1,4 @@
-class TableController
+class TableController < ApplicationController
   
   def index
     expires_in TableSetter.cache_timeout.minutes
