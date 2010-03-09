@@ -1,9 +1,10 @@
+<% table = @table unless @table.nil? %>
 <% table ||= nil %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><%= table.nil? ? "All Tables" : table.title %></title>
+    <title><%= @table.nil? ? "All Tables" : @table.title %></title>
     <script type="text/javascript"
             src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -17,9 +18,9 @@
     
     <script>
       <% if !table.nil? %>
-        var sortPlease = <%= table.sortable? %>;
-        var sortOrder = <%= table.sort_array.inspect || "null"%>;
-        var perPage = <%= table.per_page %>;
+        var sortPlease = <%= @table.sortable? %>;
+        var sortOrder = <%= @table.sort_array.inspect || "null"%>;
+        var perPage = <%= @table.per_page %>;
       <% else %>
         var sortPlease = false;
       <% end %>

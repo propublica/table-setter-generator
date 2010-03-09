@@ -10,9 +10,8 @@ class TableSetterGenerator < Rails::Generator::Base
       
       # Views
       m.directory "app/views/table/"
-      ["index.erb", "table.erb"].each do |f|
-        m.file "ts/views/#{f}", "app/views/table/#{f}"
-      end
+      m.file "ts/views/index.erb", "app/views/table/index.erb"
+      m.file "ts/views/table.erb", "app/views/table/table.erb"
       
       # Layout
       m.directory "app/views/layouts/"
@@ -27,7 +26,7 @@ class TableSetterGenerator < Rails::Generator::Base
       
       m.directory "public/stylesheets"
       m.file "ts/public/stylesheets/stylesheet.css",
-             "public/stylesheets/application.css"
+             "public/stylesheets/stylesheet.css"
       
       m.directory "public/images"
       ["th_arrow_asc.gif", "th_arrow_desc.gif"].each do |image|
@@ -36,8 +35,8 @@ class TableSetterGenerator < Rails::Generator::Base
       
       # TableSetter Config Files
       m.directory "config/tables"
-      ["example.yml", "example_facted.yml", "example_formatted.csv", 
-        "example_fomatted.yml", "example_local.csv", "example_local.yml"].each do |table|
+      ["example.yml", "example_faceted.yml", "example_formatted.csv", 
+        "example_formatted.yml", "example_local.csv", "example_local.yml"].each do |table|
         m.file "ts/tables/#{table}", "config/tables/#{table}"
       end
       
@@ -46,27 +45,27 @@ class TableSetterGenerator < Rails::Generator::Base
       m.file "table_controller.rb", "app/controllers/table_controller.rb"
       
       # File changes
-      m.route! "map.table \"tables/\", :controller => :table, :action => :show"
-      m.route! "map.root   :controller => :table, :action => :index"
+      m.route! 'map.table ":slug/:page", :controller => :table, :action => :table, :requirements => { :page => /\d+/}, :page => nil'
+      m.route! "map.expire ':slug/expire', :controller => :table, :action => :expire"
+      m.route! "map.root :controller => :table, :action => :index"
       
-      m.environment! "production.rb", <<-EOS
-TableSetter::App.cache_timeout = 15.minutes
-config.middleware.use Rack::Cache,
-      :metastore   => "file:/#{RAILS_ROOT}/tmp/meta",
-      :entitystore => "file:/#{RAILS_ROOT}/tmp/body"
-EOS
+
       m.config! "config.gem 'table_setter'"
       m.config! "config.frameworks -= [ :active_record, :active_resource, :action_mailer ]"
-      m.environment! "production.rb",  'TableSetter.config_path "#{RAILS_ROOT}/config/tables/"'
-      m.environment! "environment.rb", 'TableSetter.config_path "#{RAILS_ROOT}/config/tables/"'
+
+      
+      # Environment
+      m.gsub_file "config/environment.rb", /(\z)/m do |match|
+        "\n" + 'TableSetter.configure "#{RAILS_ROOT}/config/"'
+      end
       
       
       # Sinatra to Rails
-      m.gsub_file "app/views/layouts/layout.erb", /(javascript_script_tag)/m do |match|
+      m.gsub_file "app/views/layouts/table.erb", /(javascript_script_tag)/m do |match|
         "javascript_include_tag"
       end
       
-      m.gsub_file "app/views/layouts/layout.erb", /(#{Regexp.escape "\"/javascripts/"})/m do |match|
+      m.gsub_file "app/views/layouts/table.erb", /(\/javascripts\/|\/stylesheets\/)/m do |match|
         ""
       end
       
@@ -85,10 +84,6 @@ end
 
 
 Rails::Generator::Commands::Create.class_eval do
- def environment!(file, string)
-    insert_string! "config/environments/#{file}", string, "$"
-  end
-  
   def config!(string)
     insert_string! "config/environment.rb", string, 
       "Rails::Initializer.run do |config|"
@@ -99,7 +94,6 @@ Rails::Generator::Commands::Create.class_eval do
       "ActionController::Routing::Routes.draw do |map|"
   end
   
-
   def insert_string!(file, string, insert_after)
     gsub_file file, /(#{Regexp.escape(insert_after)})/mi do |match|
       "#{match}\n #{string}"

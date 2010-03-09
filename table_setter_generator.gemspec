@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
      "lib/table_setter_generator.rb",
      "table_setter_generator.gemspec",
      "table_setter_generator.rb",
-     "templates/routes.rb",
      "templates/table.rb",
      "templates/table_controller.rb",
      "templates/ts/config.ru",
@@ -56,24 +55,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A Rails Generator for TableSetter}
-  s.test_files = [
-    "test/app/controllers/application_controller.rb",
-     "test/app/helpers/application_helper.rb",
-     "test/config/boot.rb",
-     "test/config/environment.rb",
-     "test/config/environments/development.rb",
-     "test/config/environments/production.rb",
-     "test/config/environments/test.rb",
-     "test/config/initializers/backtrace_silencers.rb",
-     "test/config/initializers/inflections.rb",
-     "test/config/initializers/mime_types.rb",
-     "test/config/initializers/new_rails_defaults.rb",
-     "test/config/initializers/session_store.rb",
-     "test/config/routes.rb",
-     "test/db/seeds.rb",
-     "test/test/performance/browsing_test.rb",
-     "test/test/test_helper.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
