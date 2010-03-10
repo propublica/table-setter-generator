@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>TableSetterGenerator</title>
+    <link rel="stylesheet" type="text/css" href="documentation/css/styles.css" />
+  </head>
+  
+  <body>
+    <a href="http://www.propublica.org" class="propublica">&nbsp;</a>
+    <h1>TableSetterGenerator <small>&ndash; Version: <%= 
+    config = YAML.load(File.read('VERSION.yml'))
+    "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
+    %></small></h1>
+    
+    <p><a href="http://github.com/propublica/table-setter-generator">TableSetterGenerator</a> is a rails generator that will add <a href="http://github.com/propublica/table-setter">TableSetter</a> functionality to your rails app.</p>
+    <h2>Installation</h2>
+    <p>To install the generator run:</p>
+<pre>
+gem install table table_setter_generator</pre>
+    <p>and then generate the required files in your rails application's directory:</p>
+<pre>
+script/generate table_setter</pre>
+<h2>Usage</h2>
+<p>For a detailed walkthrough on how <strong>TableSetter</strong> works you should consult the <a href="http://propublica.github.com/table-setter">TableSetter</a> documentation. In Rails the routes, controller and views are in the usual places. The <strong>TableSetter</strong> <a href="http://propublica.github.com/table-setter/#thefile">configuration files</a> are in <strong>config/tables</strong> directory.</p>
+    <h2><a name="license" href="#toc">License</a></h2>
+    <pre><%= File.open("LICENSE").read %></pre>
+  </body>
+</html>
