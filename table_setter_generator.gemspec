@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{table_setter_generator}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Larson"]
-  s.date = %q{2010-03-09}
+  s.date = %q{2010-03-10}
   s.description = %q{Generate a hackable version of TableSetter}
   s.email = %q{jeff.larson@propublica.org}
   s.extra_rdoc_files = [
@@ -23,7 +23,11 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "USAGE",
-     "VERSION",
+     "VERSION.yml",
+     "documentation/css/styles.css",
+     "documentation/images/proplogo.png",
+     "documentation/index.html.erb",
+     "index.html",
      "lib/table_setter_generator.rb",
      "table_setter_generator.gemspec",
      "table_setter_generator.rb",
