@@ -24,4 +24,5 @@ class TableController < ApplicationController
     FileUtils.rm_r(Dir.glob(cache_dir + "/#{table.slug}")) rescue Errno::ENOENT
     redirect_to :action => :index
   end
+  
 end
